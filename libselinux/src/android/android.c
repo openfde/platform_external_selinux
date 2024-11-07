@@ -145,10 +145,11 @@ struct selabel_handle* initialize_backend(
 								__FUNCTION__, name, strerror(errno));
 				return NULL;
 		}
-		selinux_log(SELINUX_INFO, "SELinux: Loaded %s context from:\n", name);
+		//selinux_log(SELINUX_INFO, "SELinux: Loaded %s context from:\n", name);
 		for (unsigned i = 0; i < nopts; i++) {
-			if (opts[i].type == SELABEL_OPT_PATH)
-				selinux_log(SELINUX_INFO, "		%s\n", opts[i].value);
+			if (opts[i].type == SELABEL_OPT_PATH) {
+				//selinux_log(SELINUX_INFO, "		%s\n", opts[i].value);
+            }
 		}
 		return sehandle;
 }
