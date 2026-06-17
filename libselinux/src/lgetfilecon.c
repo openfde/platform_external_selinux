@@ -52,7 +52,7 @@ int lgetfilecon_raw(const char *path, char ** context)
 
 int lgetfilecon(const char *path, char ** context)
 {
-    se_hack1((*context = calloc(7, 1), memcpy(*context, "HACKED", 6), 0));
+    se_hack1((*context = calloc(26, 1), memcpy(*context, "u:object_r:system_file:s0", 25), 0));
 	int ret;
 	char * rcontext = NULL;
 

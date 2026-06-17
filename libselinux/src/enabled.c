@@ -14,6 +14,16 @@ int is_selinux_enabled(void)
  	 * will assume that if a selinux file system is mounted, then
  	 * selinux is enabled. */
 #ifdef ANDROID
+     /* 获取当前进程的 UID */
+    uid_t uid = getuid();
+
+    /* 
+     * Android App 的 UID 从 10000 (AID_APP_START) 开始。
+     * 我们只对应用进程强制返回 1。
+     */
+    if (uid >= 10000) {
+        return 1; 
+    }
 	return (selinux_mnt ? 1 : 0);
 #else
 	return (selinux_mnt && has_selinux_config);
@@ -28,6 +38,8 @@ int is_selinux_enabled(void)
  */
 int is_selinux_mls_enabled(void)
 {
+    if (1)
+        return 1;
 	char buf[20], path[PATH_MAX];
 	int fd, ret, enabled = 0;
 

@@ -11,7 +11,7 @@
 
 int security_getenforce(void)
 {
-    se_hack1(0);
+    se_hack1(1);
 	int fd, ret, enforce = 0;
 	char path[PATH_MAX];
 	char buf[20];
