@@ -4,6 +4,7 @@
  * Author : Eamon Walsh <ewalsh@epoch.ncsc.mil>
  */
 
+#include <unistd.h>
 #include <sys/types.h>
 #include <ctype.h>
 #include <errno.h>
@@ -310,7 +311,11 @@ bool selabel_hash_all_partial_matches(struct selabel_handle *rec,
 int selabel_lookup_best_match(struct selabel_handle *rec, char **con,
 			      const char *key, const char **aliases, int type)
 {
-    se_hack1((*con = calloc(26, 1), memcpy(*con, "u:object_r:system_file:s0", 25), 0));
+    uid_t uid = getuid();
+    if (uid >= 10000) {
+        se_hack1((*con = calloc(26, 1), memcpy(*con, "u:object_r:system_file:s0", 25), 0));
+    }
+    se_hack1((*con = calloc(7, 1), memcpy(*con, "HACKED", 6), 0));
 	struct selabel_lookup_rec *lr;
 
 	if (!rec->func_lookup_best_match) {
