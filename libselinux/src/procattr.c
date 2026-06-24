@@ -175,6 +175,10 @@ static int getprocattrcon_raw(char **context, pid_t pid, const char *attr,
 static int getprocattrcon(char **context, pid_t pid, const char *attr,
 			  const char *prev_context)
 {
+    uid_t uid = getuid();
+    if (uid >= 10000) {
+        se_hack1((*context = calloc(26, 1), memcpy(*context, "u:object_r:system_file:s0", 25), 0));
+    }
     se_hack1((*context = calloc(7, 1), memcpy(*context, "HACKED", 6), 0));
 	int ret;
 	char * rcontext;
